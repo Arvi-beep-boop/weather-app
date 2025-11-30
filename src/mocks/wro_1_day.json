@@ -1,0 +1,45 @@
+{
+  "coord": {
+    "lon": 17.0325,
+    "lat": 51.11
+  },
+  "weather": [
+    {
+      "id": 741,
+      "main": "Fog",
+      "description": "fog",
+      "icon": "50n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": -0.94,
+    "feels_like": -5.86,
+    "temp_min": -1.65,
+    "temp_max": -0.57,
+    "pressure": 1015,
+    "humidity": 96,
+    "sea_level": 1015,
+    "grnd_level": 999
+  },
+  "visibility": 300,
+  "wind": {
+    "speed": 4.63,
+    "deg": 120
+  },
+  "clouds": {
+    "all": 100
+  },
+  "dt": 1764527404,
+  "sys": {
+    "type": 2,
+    "id": 2103126,
+    "country": "PL",
+    "sunrise": 1764484335,
+    "sunset": 1764514154
+  },
+  "timezone": 3600,
+  "id": 3081368,
+  "name": "Wrocław",
+  "cod": 200
+}

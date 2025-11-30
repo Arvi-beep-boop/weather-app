@@ -17,7 +17,7 @@ export const openWeatherMapBaseQuery = (
         ...fetchArgs,
         params: {
           ...(fetchArgs.params || {}),
-          appid: import.meta.env.OPEN_WEATHER_APP_ID,
+          appid: import.meta.env.VITE_OPEN_WEATHER_APP_ID,
         },
       },
       api,

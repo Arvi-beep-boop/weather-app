@@ -4,6 +4,7 @@ export interface CurrentWeatherResponse {
     wind: Wind;
     clouds: {all: number} // cloudiness %
     rain: {'1h': number}
+    name: string
 }
 
 interface Weather {

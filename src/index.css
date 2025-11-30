@@ -1,3 +1,16 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-primary: #13c8ec;
+  --color-background-light: #f8f9fa;
+  --color-background-dark: #101f22;
+  --font-sans: Space Grotesk, sans-serif;
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

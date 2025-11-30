@@ -1,5 +1,5 @@
 export interface WeatherQuery {
-    lat: string;
-    lon: string;
+    lat: number;
+    lon: number;
     units: 'standard' | 'metric' | 'imperial' 
 }
