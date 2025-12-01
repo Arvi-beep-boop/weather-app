@@ -6,6 +6,9 @@ import { geocodingApi } from "./api/geocodingApi";
 import { weatherApi } from "./api/weatherApi";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { WeatherCard } from "./components/WeatherCard";
+import { Dashboard } from "./components/Dashboard";
+import { Route, Routes } from "react-router";
+import { WeatherDetails } from "./components/WeatherDetails";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -15,18 +18,10 @@ function App() {
   // console.log(weather)
 
   return (
-    <>
-      <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          <WeatherCard />
-          <WeatherCard />
-          <WeatherCard />
-          <WeatherCard />
-          <WeatherCard />
-
-        </div>
-      </main>
-    </>
+    <Routes>
+      <Route index element={<Dashboard />} />
+      <Route path="details/:city" element={<WeatherDetails />} />
+    </Routes>
   );
 }
 

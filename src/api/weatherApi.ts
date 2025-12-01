@@ -17,7 +17,20 @@ export const weatherApi = createApi({
     getCurrentWeather: build.query<CurrentWeatherResponse, WeatherQuery>({
       query: (params) => ({
         url: "weather",
-        params,
+        params:{
+          ...params,
+          lang: 'PL'
+        },
+      }),
+    }),
+    getForecastWeather: build.query<CurrentWeatherResponse, WeatherQuery>({
+      query: (params) => ({
+        url: "forecast/daily",
+        params:{
+          ...params,
+          lang: 'PL',
+          cnt: 5
+        },
       }),
     }),
   }),

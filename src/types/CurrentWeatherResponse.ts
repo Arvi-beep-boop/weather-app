@@ -1,17 +1,13 @@
+import type { Weather } from "./Weather";
+
 export interface CurrentWeatherResponse {
-    weather: Weather;
+    weather: Weather[];
     main: Main;
     wind: Wind;
     clouds: {all: number} // cloudiness %
     rain: {'1h': number}
+    sys: Sys;
     name: string
-}
-
-interface Weather {
-    id: number;
-    main: string;
-    description: string;
-    icon: string
 }
 
 interface Main {
@@ -26,4 +22,8 @@ interface Main {
 interface Wind {
     speed: number; 
     deg: number; // direction
+}
+
+interface Sys {
+    country: string;
 }
