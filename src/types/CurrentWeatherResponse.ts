@@ -5,9 +5,10 @@ export interface CurrentWeatherResponse {
     main: Main;
     wind: Wind;
     clouds: {all: number} // cloudiness %
-    rain: {'1h': number}
+    rain?: {'1h': number}
     sys: Sys;
-    name: string
+    name: string;
+    dt: number
 }
 
 interface Main {
