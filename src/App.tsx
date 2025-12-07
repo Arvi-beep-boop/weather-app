@@ -1,10 +1,27 @@
 import "./App.css";
 
-import { Dashboard } from "./components/Dashboard";
-import { Route, Routes } from "react-router";
+import { WeatherList } from "./components/WeatherList";
+import { Link, Route, Routes } from "react-router";
 import { WeatherDetails } from "./components/WeatherDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { weatherSlice } from "./store/weather.slice";
+import { SearchField } from "./components/SearchField";
+
+const DASHBOARD_CITY_LIST = [
+  "Wrocław",
+  "Kraków",
+  "Warszawa",
+  "Gdańsk",
+  "Zakopane",
+];
 
 function App() {
+  const favouriteCityList = useSelector(
+    weatherSlice.selectors.selectFavouriteCityList
+  );
+  const dispatch = useDispatch();
+  const units = useSelector(weatherSlice.selectors.selectUnits);
+
   return (
     <div className="relative flex ite h-auto min-h-screen w-full flex-col dark group/design-root overflow-x-hidden">
       <div className="layout-container flex h-full grow flex-col">
@@ -19,35 +36,62 @@ function App() {
                     </span>
                   </div>
                   <h2 className="text-black dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
-                    WeatherApp
+                    Prognoza pogody Chmurka
                   </h2>
                 </div>
                 <div className="hidden md:flex items-center gap-9">
-                  <a
+                  <Link
                     className="text-black dark:text-white text-sm font-medium leading-normal"
-                    href="#"
+                    to="/"
                   >
-                    Home
-                  </a>
+                    Stona główna
+                  </Link>
+                </div>
+                <div className="hidden md:flex items-center gap-9">
+                  <Link
+                    className="text-black dark:text-white text-sm font-medium leading-normal"
+                    to="/favourites"
+                  >
+                    Ulubione
+                  </Link>
                 </div>
               </div>
-              <div className="flex flex-1 justify-end gap-4 sm:gap-8 items-center">
-                <label className="flex flex-col min-w-40 !h-10 max-w-64">
-                  <div className="flex w-full flex-1 items-stretch rounded-lg h-full">
-                    <div className="text-gray-400 dark:text-[#92c0c9] flex border-none bg-black/5 dark:bg-[#234248] items-center justify-center pl-4 rounded-l-lg border-r-0">
-                      <span className="material-symbols-outlined">search</span>
-                    </div>
-                    <input
-                      className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-black dark:text-white focus:outline-0 focus:ring-0 border-none bg-black/5 dark:bg-[#234248] focus:border-none h-full placeholder:text-gray-400 dark:placeholder:text-[#92c0c9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
-                      placeholder="Search"
-                      value=""
-                    />
-                  </div>
+              <div className="flex items-center  gap-4 sm:gap-8">
+                <label className="flex items-center me-5 cursor-pointer">
+                  <span className="select-none mr-3 font-medium text-2xl text-heading">
+                    °F
+                  </span>
+                  <input
+                    type="checkbox"
+                    value=""
+                    className="sr-only peer"
+                    checked={units === 'metric'}
+                    onClick={() => dispatch(weatherSlice.actions.toggleUnits())}
+                  />
+                  <div className="relative w-9 h-5 bg-neutral-quaternary rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-teal-600 dark:peer-checked:bg-teal-600"></div>
+                  <span className="select-none ms-3 text-2xl font-medium text-heading">
+                    °C
+                  </span>
                 </label>
+                <SearchField />
               </div>
             </header>
             <Routes>
-              <Route index element={<Dashboard />} />
+              <Route
+                index
+                element={
+                  <WeatherList
+                    title="Deska rozdzielcza"
+                    cityList={DASHBOARD_CITY_LIST}
+                  />
+                }
+              />
+              <Route
+                path="favourites"
+                element={
+                  <WeatherList title="Ulubione" cityList={favouriteCityList} />
+                }
+              />
               <Route path="details/:city" element={<WeatherDetails />} />
             </Routes>
           </div>

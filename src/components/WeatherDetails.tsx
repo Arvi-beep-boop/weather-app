@@ -5,31 +5,45 @@ import { skipToken } from "@reduxjs/toolkit/query";
 import { getAggregatedForecast } from "../helpers/getAggregatedForecast";
 import { useDispatch, useSelector } from "react-redux";
 import { weatherSlice } from "../store/weather.slice";
+import { Units } from "./Units";
 
 export function WeatherDetails() {
+  const units = useSelector(weatherSlice.selectors.selectUnits);
   const dispatch = useDispatch();
   const { city } = useParams();
 
-  const { data: currentDayData } = weatherApi.useGetCurrentWeatherQuery(
-    city ? { q: city, units: "metric" } : skipToken
-  );
+  const { data: currentDayData, error: currentDayError } =
+    weatherApi.useGetCurrentWeatherQuery(
+      city ? { q: city, units: units } : skipToken
+    );
 
-  const { data: forecastData } = weatherApi.useGetForecastWeatherQuery(
-    city ? { q: city, units: "metric" } : skipToken,
-    {
-      selectFromResult: (queryState) => {
-        return {
-          ...queryState,
-          data: queryState.data && getAggregatedForecast(queryState.data),
-          currentData:
-            queryState.currentData &&
-            getAggregatedForecast(queryState.currentData),
-        };
-      },
-    }
-  );
+  const { data: forecastData, error: forecastError } =
+    weatherApi.useGetForecastWeatherQuery(
+      city ? { q: city, units: units } : skipToken,
+      {
+        selectFromResult: (queryState) => {
+          return {
+            ...queryState,
+            data: queryState.data && getAggregatedForecast(queryState.data),
+            currentData:
+              queryState.currentData &&
+              getAggregatedForecast(queryState.currentData),
+          };
+        },
+      }
+    );
 
   const cityList = useSelector(weatherSlice.selectors.selectFavouriteCityList);
+
+  const error = currentDayError || forecastError;
+
+  if (error)
+    return (
+      <div className="flex flex-col md:flex-row items-center gap-4 p-4 bg-black/5 dark:bg-[#234248]/50 rounded-xl transition-shadow hover:shadow-lg">
+        Nie można pobrać pogody dla miasta {city}: <br />
+        {(error as any).data.message}
+      </div>
+    );
 
   if (!currentDayData || !forecastData) return "Loading...";
 
@@ -88,7 +102,7 @@ export function WeatherDetails() {
               Obecna pogoda
             </p>
             <p className="text-black dark:text-white text-6xl font-bold leading-tight">
-              {Math.round(currentDayData.main.temp)}°C
+              {Math.round(currentDayData.main.temp)}°<Units/>
             </p>
             <p className="text-black dark:text-white text-lg font-medium leading-normal">
               {currentDayData.weather[0].description}
@@ -158,8 +172,8 @@ export function WeatherDetails() {
                   </div>
                   <div>
                     <p className="text-black dark:text-white text-xl font-bold leading-tight">
-                      {Math.round(item.temp.day)}° /{" "}
-                      {Math.round(item.temp.night)}°
+                      {Math.round(item.temp.day)}°<Units/> /{" "}
+                      {Math.round(item.temp.night)}°<Units/>
                     </p>
                     <p className="text-gray-500 dark:text-[#92c0c9] text-base font-normal leading-normal">
                       {item.weather[0].description}
@@ -198,7 +212,7 @@ export function WeatherDetails() {
                   <div>
                     <p className="text-gray-500 dark:text-[#92c0c9]">Wiatr</p>
                     <p className="text-black dark:text-white font-bold">
-                      {Math.round(item.speed * 3.6)} km/h{" "}
+                      {getWindSpeed(item.speed, units)}{" "}
                       {getWindDirection(item.deg)}
                     </p>
                   </div>
@@ -229,4 +243,13 @@ function getWindDirection(degrees: number) {
   const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
 
   return directions[Math.round(degrees / 45)];
+}
+
+function getWindSpeed (value: number, units: string){
+  if(units === 'metric'){
+    return `${Math.round(value * 3.6)} km/h`;
+  }
+  else {
+    return `${Math.round(value)} mph`
+  }
 }

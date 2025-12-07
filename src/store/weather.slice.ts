@@ -2,10 +2,12 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface WeatherState {
   favouriteCityList: string[];
+  units: 'metric' | 'imperial'
 }
 
 const initialState: WeatherState = {
-  favouriteCityList: ["Wrocław", "Kraków", "Warszawa", "Gdańsk", "Zakopane"],
+  favouriteCityList: [],
+  units: 'metric'
 };
 
 export const weatherSlice = createSlice({
@@ -29,8 +31,16 @@ export const weatherSlice = createSlice({
         state.favouriteCityList.push(cityName);
       }
     },
+    toggleUnits : (state) => {
+      if (state.units === 'metric') {
+        state.units = 'imperial';
+      } else {
+        state.units = 'metric';
+      }
+    }
   },
   selectors: {
     selectFavouriteCityList: (state) => state.favouriteCityList,
+    selectUnits: (state) => state.units,
   },
 });
