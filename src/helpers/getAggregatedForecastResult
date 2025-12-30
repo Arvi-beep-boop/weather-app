@@ -1,0 +1,109 @@
+{
+  "city": {
+    "coord": {
+      "lat": 51.1,
+      "lon": 17.0333,
+    },
+    "country": "PL",
+    "id": 3081368,
+    "name": "Wrocław",
+    "population": 9999,
+    "sunrise": 1765003203,
+    "sunset": 1765032367,
+    "timezone": 3600,
+  },
+  "list": [
+    {
+      "clouds": 95,
+      "deg": 226,
+      "dt": 1765065600,
+      "gust": 7.29,
+      "humidity": 80,
+      "pop": 0,
+      "pressure": 1015,
+      "rain": undefined,
+      "speed": 3.05,
+      "temp": {
+        "day": 8.06,
+        "night": 5.12,
+      },
+      "weather": [
+        {
+          "description": "zachmurzenie duże",
+          "icon": "04d",
+          "id": 804,
+          "main": "Clouds",
+        },
+      ],
+    },
+    {
+      "clouds": 100,
+      "deg": 214,
+      "dt": 1765152000,
+      "gust": 7.23,
+      "humidity": 87,
+      "pop": 0,
+      "pressure": 1018,
+      "rain": undefined,
+      "speed": 2.81,
+      "temp": {
+        "day": 9.11,
+        "night": 6.2,
+      },
+      "weather": [
+        {
+          "description": "zachmurzenie duże",
+          "icon": "04d",
+          "id": 804,
+          "main": "Clouds",
+        },
+      ],
+    },
+    {
+      "clouds": 100,
+      "deg": 225,
+      "dt": 1765238400,
+      "gust": 5.71,
+      "humidity": 81,
+      "pop": 0,
+      "pressure": 1019,
+      "rain": undefined,
+      "speed": 2.68,
+      "temp": {
+        "day": 12.45,
+        "night": 9.04,
+      },
+      "weather": [
+        {
+          "description": "zachmurzenie duże",
+          "icon": "04d",
+          "id": 804,
+          "main": "Clouds",
+        },
+      ],
+    },
+    {
+      "clouds": 81,
+      "deg": 221,
+      "dt": 1765324800,
+      "gust": 5.31,
+      "humidity": 63,
+      "pop": 0,
+      "pressure": 1016,
+      "rain": undefined,
+      "speed": 2.26,
+      "temp": {
+        "day": 13.71,
+        "night": 10.35,
+      },
+      "weather": [
+        {
+          "description": "zachmurzenie umiarkowane",
+          "icon": "04d",
+          "id": 803,
+          "main": "Clouds",
+        },
+      ],
+    },
+  ],
+}

@@ -1,6 +1,4 @@
-import { useSelector } from "react-redux";
 import { WeatherCard } from "./WeatherCard";
-import { weatherSlice } from "../store/weather.slice";
 
 interface WeatherListProps {
   title: string;
