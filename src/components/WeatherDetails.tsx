@@ -41,6 +41,7 @@ export function WeatherDetails() {
     return (
       <div className="flex flex-col md:flex-row items-center gap-4 p-4 bg-black/5 dark:bg-[#234248]/50 rounded-xl transition-shadow hover:shadow-lg">
         Nie można pobrać pogody dla miasta {city}: <br />
+        {/* eslint-disable @typescript-eslint/no-explicit-any */}
         {(error as any).data.message}
       </div>
     );
